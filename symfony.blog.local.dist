@@ -1,0 +1,43 @@
+upstream symfonyBlog {
+    server symfony.blog.local:80;
+}
+
+server {
+    listen 80;
+    server_name symfony.blog.local *.symfony.blog.local;
+
+    include /Users/oleksandrkopyl/Project/symfony_blog/nginx.conf.local;
+}
+
+server {
+  listen 80;
+  server_name symfony.blog.local *.symfony.blog.local;
+
+  return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+
+    server_name symfony.blog.local *.symfony.blog.local;
+
+    access_log /usr/local/var/log/nginx/access.log;
+    error_log /usr/local/var/log/nginx/error.log;
+
+
+    ssl_certificate /opt/homebrew/etc/nginx/certs/symfony.blog.local.crt;
+    ssl_certificate_key /opt/homebrew/etc/nginx/certs/symfony.blog.local.key;
+    
+    location / {
+        proxy_set_header        Host $host;
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        X-Forwarded-Proto $scheme;
+
+        proxy_read_timeout 600;
+        proxy_connect_timeout 600;
+        proxy_send_timeout 600;
+
+        proxy_pass http://symfonyBlog;
+    }
+}
