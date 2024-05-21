@@ -19,6 +19,12 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    KopylSolution\AdminBundle\:
+        resource: '../packages/kopyl-solution/AdminBundle/src/'
+        exclude:
+            - '../packages/kopyl-solution/AdminBundle/src/DependencyInjection/'
+            - '../packages/kopyl-solution/AdminBundle/src/Entity/'
+            - '../packages/kopyl-solution/AdminBundle/src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

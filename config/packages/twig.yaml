@@ -1,4 +1,7 @@
 twig:
+    paths:
+        '%kernel.project_dir%/templates': default
+        '%kernel.project_dir%/packages/kopyl-solution/AdminBundle/templates': admin_bundle
     file_name_pattern: '*.twig'
 
 when@test:

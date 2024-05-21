@@ -26,6 +26,9 @@
             "migrations/.gitignore"
         ]
     },
+    "kopyl-solution/admin-bundle": {
+        "version": "1.0.0"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
